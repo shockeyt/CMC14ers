@@ -31,7 +31,12 @@ export default class CMC14ers extends Component {
   }
   render() {
       return (
-        <TabBarIOS selectedTab={this.state.selectedTab}>
+        <TabBarIOS 
+          unselectedTintColor="#82C6E2"
+          tintColor="white"
+          unselectedItemTintColor="#70CE9B"
+          barTintColor="#234F33"
+          selectedTab={this.state.selectedTab}>
           <Icon.TabBarItemIOS
             selected={this.state.selectedTab === 'welcome'}
             //systemIcon="featured"
