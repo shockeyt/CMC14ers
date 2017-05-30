@@ -25,7 +25,7 @@ class Welcome extends Component {
       <View style={styles.container}>
         <Image style={styles.image} source={logo} />
         <Text style={styles.description}>
-          Welcome the CMC's Guide for 14ers!
+          Welcome to the CMC's Guide for 14ers!
         </Text>
       </View>
     );

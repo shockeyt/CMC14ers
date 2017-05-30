@@ -9,6 +9,8 @@ import _ from 'lodash';
 import SearchBar from './SearchBar';
 import Footer from './Footer'; 
 
+import { Separator } from 'react-native-form-generator';
+
 const ds = {};
 
 var styles = StyleSheet.create({
