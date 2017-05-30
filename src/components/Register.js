@@ -29,6 +29,29 @@ var styles = StyleSheet.create({
     //alignItems: 'center',
     backgroundColor: '#82C6E2',
   },
+  button: {
+    fontSize: 20,
+    height: 50,
+    paddingTop: 5,
+    color: 'white',
+    backgroundColor: '#234F33',
+  },
+  completed: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 30,
+    marginTop: 60,
+  },
+  thankyou: {
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 30,
+  },
+  message: {
+    marginBottom: 20,
+    fontSize: 20,
+    textAlign: 'center',
+  },
 
 });
  
@@ -72,6 +95,7 @@ class Register extends Component {
 
     postRegister(data){
       console.log("form data is", data);
+      //this.setState({showComplete: true});
       axios.post('http://localhost:3000/register/', {
         peak: data.peak,
         first_name: data.first_name,
@@ -88,6 +112,7 @@ class Register extends Component {
       .catch(function (error) {
         console.log(error);
       });
+      this.setState({showComplete: true});
     }
 
     openTermsAndConditionsURL(){
@@ -96,6 +121,13 @@ class Register extends Component {
     render(){
       return (
         <View style={styles.container}>
+        {this.state.showComplete &&
+        <View style={styles.completed}>
+        <Text style={styles.thankyou}>Thank you!</Text>
+        <Text style={styles.message}>Your peak has been sent to the CMC to be registered</Text>
+        <Button style={styles.button} onPress={() => {this.setState({showComplete: false})}}>Back to Register</Button>
+        </View>
+        ||  
         <ScrollView keyboardShouldPersistTaps="always" style={{paddingLeft:10,paddingRight:10, height:200}}>
         <Text style={styles.description}>Log Summit</Text>
 
@@ -167,14 +199,14 @@ class Register extends Component {
             ref="CMC_past_member"
           />
           <InputField label='Birthday Year' ref='birth_year' placeholder='Year'/>  
-          <LinkField style={{backgroundColor: '#008751', textAlign: 'center'}} label="test test test" onPress={()=>{console.log("pressed test");}}/>
-          <Button onPress={()=>{this.postRegister(this.state.formData)}}>Submit</Button>
+          <Button style={styles.button} onPress={()=>{this.postRegister(this.state.formData)}}>Submit</Button>
           <Button onPress={()=>{this.getRegisters()}}>Check</Button>
           </Form>
           
           <Text>{JSON.stringify(this.state.formData)}</Text>
 
         </ScrollView>
+        }
         </View>
         );
         
