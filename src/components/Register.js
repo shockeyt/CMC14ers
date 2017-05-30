@@ -14,6 +14,7 @@ import { Form,
 } from 'react-native-form-generator';
 
 import Button from 'react-native-button';
+import axios from 'axios';
  
 var styles = StyleSheet.create({
   description: {
@@ -58,6 +59,37 @@ class Register extends Component {
     handleFormFocus(e, component){
       //console.log(e, component);
     }
+    //get local host data
+    getRegisters(){
+      axios.get('http://localhost:3000/register/')
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    postRegister(data){
+      console.log("form data is", data);
+      axios.post('http://localhost:3000/register/', {
+        peak: data.peak,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        zipcode: data.zipcode,
+        CMC_member: data.CMC_member,
+        CMC_past_member: data.CMC_past_member,
+        birth_year: data.birth_year
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
     openTermsAndConditionsURL(){
 
     }
@@ -136,7 +168,8 @@ class Register extends Component {
           />
           <InputField label='Birthday Year' ref='birth_year' placeholder='Year'/>  
           <LinkField style={{backgroundColor: '#008751', textAlign: 'center'}} label="test test test" onPress={()=>{console.log("pressed test");}}/>
-          <Button onPress={()=>{console.log(JSON.stringify(this.state.formData));}}>Submit</Button>
+          <Button onPress={()=>{this.postRegister(this.state.formData)}}>Submit</Button>
+          <Button onPress={()=>{this.getRegisters()}}>Check</Button>
           </Form>
           
           <Text>{JSON.stringify(this.state.formData)}</Text>
