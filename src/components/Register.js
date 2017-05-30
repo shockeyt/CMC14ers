@@ -12,6 +12,8 @@ import { Form,
   Separator,InputField, LinkField,
   SwitchField, PickerField,DatePickerField,TimePickerField,
 } from 'react-native-form-generator';
+
+import Button from 'react-native-button';
  
 var styles = StyleSheet.create({
   description: {
@@ -133,7 +135,8 @@ class Register extends Component {
             ref="CMC_past_member"
           />
           <InputField label='Birthday Year' ref='birth_year' placeholder='Year'/>  
-          <LinkField label="test test test" onPress={()=>{}}/>
+          <LinkField style={{backgroundColor: '#008751', textAlign: 'center'}} label="test test test" onPress={()=>{console.log("pressed test");}}/>
+          <Button onPress={()=>{console.log(JSON.stringify(this.state.formData));}}>Submit</Button>
           </Form>
           
           <Text>{JSON.stringify(this.state.formData)}</Text>
